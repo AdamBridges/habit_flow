@@ -21,10 +21,82 @@
     <main>
       <h2>My Habits</h2>
       <div>
+        <p>Browse all the habits you've created. Filter by category to find what fits your goals.</p>
+    </header>
+
+
+    <!-- Filter for habits by category or search by habit name -->
+
+
+    <form>
+        <label for="searchInput">Search:</label>
+        <input id="searchInput" type="search" name="search" placeholder="Search habits..." />
+
+
+        <label for="categoryFilter">Filter by category:</label>
+        <select id="categoryFilter" name="category">
+            <option value="all">All</option>
+            <option value="Health">Health</option>
+            <option value="Productivity">Productivity</option>
+            <option value="Learning">Learning</option>
+        </select>
+
+
+        <button type="submit">Apply</button>
+    </form>
+
+
+    <hr />
+
+
+    <!-- Show this section when the user has at least one habit created.
+         At the moment, these articles are placeholders since it is not reading
+         from any real database. They appear above the "no habits created" warning
+         as it can't be hidden/toggled. -->
+
+
+    <section>
+        <h2>Your Habits</h2>
+
+
+        <article>
+            <h3>Drink 8 glasses of water</h3>
+            <p><strong>Category:</strong> Health</p>
+            <p>I want to stay hydrated throughout the day.</p>
+            <p><strong>Frequency:</strong> Daily | <strong>Priority:</strong> Medium</p>
+        </article>
+
+
+        <article>
+            <h3>Clean my room.</h3>
+            <p><strong>Category:</strong> Productivity</p>
+            <p>I will spend 15 minutes each evening keeping up with household cleanliness.</p>
+            <p><strong>Frequency:</strong> Daily | <strong>Priority:</strong> Low</p>
+        </article>
+
+
+        <article>
+            <h3>Practice coding problems</h3>
+            <p><strong>Category:</strong> Learning</p>
+            <p>I want to improve my programming skills.</p>
+            <p><strong>Frequency:</strong> Daily | <strong>Priority:</strong> High</p>
+        </article>
+
+
+    </section>
+
+
+    <!-- Show this section instead of the one above when the user has
+         not created any habits yet. -->
+    <section>
+        <h2>No Habits Created</h2>
         <p>
-          ...Habits content goes here...<br />
-          <a href="add_habit.html">Add Habit</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            You haven't created any habits yet! Try making a new habit or browse for something
+            that interests you on the
+            <a href="add_habit.html">Add Habit</a> page.
         </p>
+    </section>
+
       </div>
     </main>
     <footer>
