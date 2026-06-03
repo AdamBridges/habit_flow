@@ -11,17 +11,9 @@
    bottom. Everything else is driven by the element you choose.
    =================================================================== */
 
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap");
-
-/* --- design tokens -------------------------------------------------- */
 :root {
-  /* type carries the personality. A grotesk for UI + a mono for data
-     (numbers, labels, nav) gives the "calm instrument" feel and breaks
-     hard from the default system-ui look. */
-  --font: "Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
-  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
-    monospace;
+  --font: Helvetica, Arial, sans-serif;
+  --font-mono: Arial, sans-serif, monospace;
 
   --max-width: 56rem;
 
@@ -94,34 +86,6 @@
   --brand-tint-4: var(--brand);
 }
 
-/* dark theme: follows the OS, or force it with <html data-theme="dark"> */
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --brand: #2dd4a7;
-    --brand-hover: #46e0ba;
-    --brand-soft: #14271f;
-    --brand-contrast: #05231a;
-
-    --accent: #f5b73f;
-    --accent-hover: #ffc658;
-    --accent-soft: #2c2410;
-    --accent-contrast: #221802;
-
-    --bg: #0e1512;
-    --surface: #15201b;
-    --surface-2: #1d2a23;
-    --text: #e6efe9;
-    --text-muted: #93a69c;
-    --border: #273931;
-    --grid-line: rgba(230, 239, 233, 0.05);
-
-    --success-soft: #12281d;
-    --warning-soft: #2c220f;
-    --danger-soft: #2e1716;
-  }
-}
-
 :root[data-theme="dark"] {
   --brand: #2dd4a7;
   --brand-hover: #46e0ba;
@@ -163,7 +127,7 @@ html {
 
 body {
   font-family: var(--font);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.65;
   color: var(--text);
   background-color: var(--bg);
@@ -208,6 +172,7 @@ h2 {
 h3 {
   font-size: 1.3rem;
 }
+
 h4 {
   font-size: 1.05rem;
 }
@@ -248,7 +213,7 @@ b {
 }
 
 small {
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   color: var(--text-muted);
 }
 
@@ -257,31 +222,6 @@ blockquote {
   padding: 0.4rem 0 0.4rem 1rem;
   border-left: 4px solid var(--brand);
   color: var(--text-muted);
-}
-
-code {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 0.1rem 0.35rem;
-}
-
-pre {
-  font-family: var(--font-mono);
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1rem;
-  overflow: auto;
-  margin-bottom: 0.9rem;
-}
-
-pre code {
-  background: none;
-  border: none;
-  padding: 0;
 }
 
 hr {
@@ -293,7 +233,7 @@ hr {
 
 /* --- page chrome: header, nav, main, footer ------------------------- */
 body > header {
-  background: transparent;
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding: 2rem 1rem 1.5rem;
   text-align: center;
@@ -301,7 +241,7 @@ body > header {
 
 body > header h1 {
   color: var(--text);
-  font-size: 1.6rem;
+  font-size: var(--text-xl);
   letter-spacing: -0.02em;
 }
 
@@ -318,7 +258,7 @@ body > header h1::before {
 }
 
 nav {
-  background: transparent;
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding: 0.35rem 1rem;
 }
@@ -338,7 +278,7 @@ nav a {
   border-radius: var(--radius);
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 1rem;
   letter-spacing: 0.02em;
 }
 
@@ -585,162 +525,4 @@ progress::-webkit-progress-value {
 }
 progress::-moz-progress-bar {
   background: var(--brand);
-}
-
-/* ===================================================================
-   Opt-in helpers — for variants semantic HTML can't imply.
-   Keep this list short on purpose; the base above covers most pages.
-   =================================================================== */
-
-/* layout */
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.grid {
-  display: grid;
-  gap: var(--space-5);
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-}
-
-.grid-2 {
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-}
-
-.grid-3 {
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-}
-
-/* inline group with consistent gap (buttons, tags, nav-like rows) */
-.cluster {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-/* vertical rhythm: even spacing between stacked children */
-.stack > * + * {
-  margin-top: var(--space-4);
-}
-
-/* explicit card, for when a block isn't a <section> */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-  padding: var(--space-5);
-}
-
-/* text */
-.muted {
-  color: var(--text-muted);
-}
-
-.center {
-  text-align: center;
-}
-
-.lead {
-  font-size: 1.15rem;
-  color: var(--text-muted);
-}
-
-/* small mono label that sits above a heading ("eyebrow") */
-.eyebrow {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--brand);
-  margin-bottom: 0.5rem;
-}
-
-/* monospace tabular figures so stats and streaks line up */
-.numeric {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-}
-
-.stat {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-  font-size: 2.6rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-/* badges / tags */
-.badge {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 700;
-  line-height: 1;
-  padding: 0.3rem 0.55rem;
-  border-radius: 999px;
-  background: var(--brand-soft);
-  color: var(--brand);
-}
-
-.badge-success {
-  background: var(--success-soft);
-  color: var(--success);
-}
-.badge-warning {
-  background: var(--warning-soft);
-  color: var(--warning);
-}
-.badge-danger {
-  background: var(--danger-soft);
-  color: var(--danger);
-}
-.badge-accent {
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-
-.text-accent {
-  color: var(--accent);
-}
-
-/* callouts / notes */
-.note {
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--brand);
-  background: var(--brand-soft);
-  border-radius: var(--radius);
-  padding: 0.9rem 1rem;
-  margin-bottom: 1rem;
-}
-
-.note-success {
-  border-left-color: var(--success);
-  background: var(--success-soft);
-}
-.note-warning {
-  border-left-color: var(--warning);
-  background: var(--warning-soft);
-}
-.note-danger {
-  border-left-color: var(--danger);
-  background: var(--danger-soft);
-}
-
-/* accessibility helper */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }
