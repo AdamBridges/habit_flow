@@ -1,7 +1,11 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Habits - HabitFlow</title>
+    <link rel="stylesheet" href="css/flow.css" />
+    <link rel="stylesheet" href="css/habits.css" />
   </head>
   <body>
     <header>
@@ -22,7 +26,6 @@
       <h2>My Habits</h2>
       <div>
         <p>Browse all the habits you've created. Filter by category to find what fits your goals.</p>
-    </header>
 
 
     <!-- Filter for habits by category or search by habit name -->
@@ -59,25 +62,25 @@
         <h2>Your Habits</h2>
 
 
-        <article>
+        <article class="priority-medium">
             <h3>Drink 8 glasses of water</h3>
-            <p><strong>Category:</strong> Health</p>
+            <p><strong>Category:</strong> <span class="category">Health</span></p>
             <p>I want to stay hydrated throughout the day.</p>
             <p><strong>Frequency:</strong> Daily | <strong>Priority:</strong> Medium</p>
         </article>
 
 
-        <article>
-            <h3>Clean my room.</h3>
-            <p><strong>Category:</strong> Productivity</p>
+        <article class="priority-low">
+            <h3>Clean my room</h3>
+            <p><strong>Category:</strong> <span class="category">Productivity</span></p>
             <p>I will spend 15 minutes each evening keeping up with household cleanliness.</p>
             <p><strong>Frequency:</strong> Daily | <strong>Priority:</strong> Low</p>
         </article>
 
 
-        <article>
+        <article class="priority-high">
             <h3>Practice coding problems</h3>
-            <p><strong>Category:</strong> Learning</p>
+            <p><strong>Category:</strong> <span class="category">Learning</span></p>
             <p>I want to improve my programming skills.</p>
             <p><strong>Frequency:</strong> Daily | <strong>Priority:</strong> High</p>
         </article>

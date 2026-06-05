@@ -1,0 +1,122 @@
+/*
+   Changed this from the house CSS file because the base stretches every
+   form control to full width and stacks them, which looks strange for
+   a filter bar that only takes up a line. 
+   */
+
+main form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--space-3) var(--space-4);
+}
+
+main form label {
+  margin-bottom: var(--space-1);
+}
+
+main form input,
+main form select {
+  width: auto;
+}
+
+main form input[type="search"] {
+  flex: 1 1 14rem;
+  min-width: 12rem;
+}
+
+/* Made the button align better with the other input objects
+   rather than the labels. */
+main form button {
+  margin-right: 0;
+}
+
+/* This is still using placeholder information. This is changed to
+  a grid format so it's more easily readable than a long list of stacked <articles>
+  The :has(article) means makes it so this section only applies if there are actually
+  habits to show, so the "No Habits Created" section is left as a normal stacked card
+  and can be appropriately toggled on or off when we implement the real functionality.*/
+main section:has(article) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-5);
+  align-items: start;
+}
+
+main section:has(article) > h2 {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+/* The section surrounding each habit tile is a white
+   card, so surface-2 with a slightly different colour here to give the
+   tiles some depth and look like items within the card. */
+main section article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: 100%;
+  padding: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+
+/* Added a hover on the tiles so they look more interactive. Only the
+   top/right/bottom edges change color so the priority stripe on the
+   LEFT edge keeps its red/yellow/green meaning while hovering. */
+main section article:hover {
+  border-top-color: var(--text-muted);
+  border-right-color: var(--text-muted);
+  border-bottom-color: var(--text-muted);
+  transform: translateY(-2px);
+}
+
+main section article h3 {
+  margin-bottom: 0;
+}
+
+main section article p {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+main section article p strong {
+  color: var(--text);
+}
+
+main section article p:last-child {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border);
+}
+
+/* Priority accents added to the <article> to color the left edge by
+   priority, e.g. <article class="priority-high">. These are fixed
+   hex values (not theme tokens) because the red/yellow/green meaning
+   should look the same in light and dark mode. */
+.priority-high {
+  border-left: 4px solid #e08a8a; /* pastel red */
+}
+.priority-medium {
+  border-left: 4px solid #f0d889; /* pastel yellow */
+}
+.priority-low {
+  border-left: 4px solid #8ecb9b; /* pastel green */
+}
+
+/* A small round label for the category mirroring the base .badge look */
+.category {
+  display: inline-block;
+  align-self: start;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: var(--brand-soft);
+  color: var(--brand);
+}
