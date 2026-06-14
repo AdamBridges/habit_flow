@@ -15,14 +15,12 @@
   --font: Helvetica, Arial, sans-serif;
   --font-mono: Arial, sans-serif, monospace;
 
-  --max-width: 56rem;
+  --max-width: 100%;
 
   --radius-sm: 4px;
   --radius: 6px;
   --radius-lg: 8px;
   --radius-full: 999px;
-  /* tactile: flat surfaces, no floating-card blur. Depth comes from
-     hairline borders and the graph-paper grid, not drop shadows. */
   --shadow: none;
   --shadow-lg: none;
 
@@ -35,7 +33,7 @@
   --space-6: 2rem;
   --space-8: 3rem;
 
-  /* type scale */
+  /* text scale */
   --text-sm: 0.875rem;
   --text-base: 1rem;
   --text-lg: 1.125rem;
@@ -121,21 +119,18 @@
   margin: 0;
 }
 
-html {
-  -webkit-text-size-adjust: 100%;
-}
-
 body {
   font-family: var(--font);
   font-size: var(--text-base);
   line-height: 1.65;
   color: var(--text);
   background-color: var(--bg);
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 28px 28px;
   -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  /* grid-template-rows: none 1fr auto; */
+  /* margin: 0; */
 }
 
 img,
@@ -159,7 +154,6 @@ h3,
 h4 {
   line-height: 1.1;
   font-weight: 700;
-  letter-spacing: -0.025em;
   color: var(--text);
 }
 
@@ -242,7 +236,6 @@ body > header {
 body > header h1 {
   color: var(--text);
   font-size: var(--text-xl);
-  letter-spacing: -0.02em;
 }
 
 /* brand "cell" mark on the wordmark — echoes the habit-grid motif */
@@ -269,7 +262,6 @@ nav b {
   justify-content: center;
   gap: 0.15rem;
   font-weight: 400;
-  max-width: var(--max-width);
   margin: 0 auto;
 }
 
@@ -291,7 +283,7 @@ nav a:hover {
 main {
   display: block;
   max-width: var(--max-width);
-  margin: 2rem auto;
+  margin: 2% 10%;
   padding: 0 1rem;
 }
 
@@ -326,11 +318,16 @@ main section p + h3 {
 
 footer {
   max-width: var(--max-width);
-  margin: 2.5rem auto 1.5rem;
-  padding: 0 1rem;
+  padding: 0 1rem 3rem;
   color: var(--text-muted);
   font-size: 0.85rem;
   text-align: center;
+  background: var(--surface);
+  margin-top: auto;
+}
+
+footer hr {
+  margin-top: 0;
 }
 
 /* --- forms ---------------------------------------------------------- */
