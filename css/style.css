@@ -316,6 +316,64 @@ main section p + h3 {
   margin-top: 1.25rem;
 }
 
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--space-4);
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  height: 100%;
+  padding: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+
+.card:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-2px);
+}
+
+.card-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.card-value {
+  display: block;
+  color: var(--text);
+  font-size: var(--text-xl);
+  line-height: 1.15;
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
 footer {
   max-width: var(--max-width);
   padding: 0 1rem 3rem;
@@ -491,6 +549,10 @@ th[scope="row"] {
   text-align: left;
 }
 
+tbody tr {
+  transition: background 0.12s ease;
+}
+
 tbody tr:hover {
   background: var(--surface-2);
 }
@@ -498,6 +560,15 @@ tbody tr:hover {
 /* --- progress + figures --------------------------------------------- */
 figure {
   margin: 0 0 1rem;
+  padding: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.12s ease;
+}
+
+figure:hover {
+  border-color: var(--text-muted);
 }
 
 figcaption {
@@ -512,6 +583,11 @@ progress {
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--brand-soft);
+  transition: filter 0.12s ease;
+}
+
+progress:hover {
+  filter: brightness(1.04);
 }
 
 progress::-webkit-progress-bar {
@@ -522,4 +598,16 @@ progress::-webkit-progress-value {
 }
 progress::-moz-progress-bar {
   background: var(--brand);
+}
+
+@media (max-width: 767px) {
+  main {
+    margin: 1.5rem 0;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
