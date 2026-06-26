@@ -4,6 +4,8 @@
     <title>Dashboard - HabitFlow</title>
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/dashboard.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
     <header>
@@ -22,6 +24,7 @@
     </nav>
     <main>
       <h2>Dashboard</h2>
+
       <div>
         <p>
             <p>Welcome back! Here's how you're doing today.</p>
@@ -34,9 +37,9 @@
 
 
         <!-- High-level stats summary (streak, today's completion, totals) -->
-        <section>
+        <section class="overview">
           <h3>Overview</h3>
-          <ul>
+          <ul class="stat-grid">
             <li><strong>Current streak:</strong> 12 days &#9650; (up from last week)</li>
             <li><strong>Today's progress:</strong> 2 of 3 habits completed</li>
             <li><strong>Habits tracked:</strong> 3</li>
@@ -50,7 +53,7 @@
 
         <!-- Daily checklist. Currently using placeholders. -->
 
-        <section>
+        <section class="today">
           <h3>Today's Habits</h3>
           <form>
             <p>
@@ -68,7 +71,6 @@
               <label for="habit3">Practice coding problems</label>
               &nbsp;&nbsp;<em>(Learning)</em>
             </p>
-            <button type="submit">Save progress</button>
           </form>
         </section>
 
@@ -78,7 +80,7 @@
 
         <!-- Performance breakdown. The triangle arrows show week-over-week change. -->
 
-        <section>
+        <section class="performance">
           <h3>Habit Performance</h3>
 
 
@@ -102,9 +104,10 @@
         <!-- Contribution chart placeholder. For now, cells display the
              number of habits completed that day. -->
 
-        <section>
+        <section class="activity">
           <h3>Recent Activity</h3>
-          <table border="1" cellpadding="6">
+          <div class="heatmap-scroll">
+            <table class="heatmap">
             <thead>
               <tr>
                 <th>&nbsp;</th>
@@ -114,43 +117,44 @@
                 <th>Week 4</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th>Mon</th>
-                <td>3</td><td>2</td><td>3</td><td>2</td>
-              </tr>
-              <tr>
-                <th>Tue</th>
-                <td>1</td><td>3</td><td>2</td><td>3</td>
-              </tr>
-              <tr>
-                <th>Wed</th>
-                <td>2</td><td>0</td><td>3</td><td>3</td>
-              </tr>
-              <tr>
-                <th>Thu</th>
-                <td>3</td><td>3</td><td>1</td><td>2</td>
-              </tr>
-              <tr>
-                <th>Fri</th>
-                <td>2</td><td>2</td><td>3</td><td>3</td>
-              </tr>
-              <tr>
-                <th>Sat</th>
-                <td>0</td><td>1</td><td>2</td><td>1</td>
-              </tr>
-              <tr>
-                <th>Sun</th>
-                <td>1</td><td>2</td><td>3</td><td>2</td>
-              </tr>
-            </tbody>
+              <tbody>
+                <tr>
+                  <th>Mon</th>
+                  <td data-level="3" title="3 of 3"></td><td data-level="2" title="2 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="2" title="2 of 3"></td>
+                </tr>
+                <tr>
+                  <th>Tue</th>
+                  <td data-level="1" title="1 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="2" title="2 of 3"></td><td data-level="3" title="3 of 3"></td>
+                </tr>
+                <tr>
+                  <th>Wed</th>
+                  <td data-level="2" title="2 of 3"></td><td data-level="0" title="0 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="3" title="3 of 3"></td>
+                </tr>
+                <tr>
+                  <th>Thu</th>
+                  <td data-level="3" title="3 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="1" title="1 of 3"></td><td data-level="2" title="2 of 3"></td>
+                </tr>
+                <tr>
+                  <th>Fri</th>
+                  <td data-level="2" title="2 of 3"></td><td data-level="2" title="2 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="3" title="3 of 3"></td>
+                </tr>
+                <tr>
+                  <th>Sat</th>
+                  <td data-level="0" title="0 of 3"></td><td data-level="1" title="1 of 3"></td><td data-level="2" title="2 of 3"></td><td data-level="1" title="1 of 3"></td>
+                </tr>
+                <tr>
+                  <th>Sun</th>
+                  <td data-level="1" title="1 of 3"></td><td data-level="2" title="2 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="2" title="2 of 3"></td>
+                </tr>
+              </tbody>
             </table>
+          </div>
           <p class="heatmap-legend">
             <span>Less</span>
-            <span class="legend-cell" data-count="0"></span>
-            <span class="legend-cell" data-count="1"></span>
-            <span class="legend-cell" data-count="2"></span>
-            <span class="legend-cell" data-count="3"></span>
+            <span class="legend-cell" data-level="0"></span>
+            <span class="legend-cell" data-level="1"></span>
+            <span class="legend-cell" data-level="2"></span>
+            <span class="legend-cell" data-level="3"></span>
             <span>More</span>
           </p>
         </section>

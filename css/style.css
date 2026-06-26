@@ -1,3 +1,581 @@
-::placeholder{
-  /* This file is intentionally left blank. */
+:root {
+  --font: Helvetica, Arial, sans-serif;
+  --font-mono: Arial, sans-serif, monospace;
+
+  --max-width: 100%;
+
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-lg: 8px;
+  --radius-full: 999px;
+  --shadow: none;
+  --shadow-lg: none;
+
+  /* spacing scale — reuse these so custom features share the rhythm */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+
+  /* text scale */
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+
+  /* brand = calm teal-green: growth, health, focus. Doubles as the
+     completion/reward color so finishing a habit feels good (dopamine
+     loop). Kept low-saturation to stay calm over long daily use. */
+  --brand: #0ea47f;
+  --brand-hover: #0c8c6c;
+  --brand-soft: #e3f5ee;
+  --brand-contrast: #ffffff;
+
+  /* accent = warm amber: optimism + energy. Use sparingly for streak
+     milestones and celebratory highlights, not as a primary surface. */
+  --accent: #f59e0b;
+  --accent-hover: #d98306;
+  --accent-soft: #fdf2dd;
+  --accent-contrast: #3a2a06;
+
+  /* calm, slightly green-neutral surfaces + whitespace lower cognitive
+     load (habit trackers work by offloading working memory). */
+  --bg: #f5f8f6;
+  --surface: #ffffff;
+  --surface-2: #eef3f0;
+  --text: #16241d;
+  --text-muted: #586b62;
+  --border: #dde7e1;
+  --grid-line: rgba(16, 36, 29, 0.05);
+
+  --success: #1f9d57;
+  --success-soft: #e7f7ee;
+  --warning: #b9760a;
+  --warning-soft: #fcf2df;
+  /* red is reserved strictly for errors/destructive actions — never for
+     a missed day, which stays neutral to avoid guilt/anxiety. */
+  --danger: #d4332f;
+  --danger-soft: #fdeceb;
+
+  /* tonal ramp for data-viz intensity (heatmaps, charts, gauges).
+     Derived from --brand, so it re-themes for free — including dark mode.
+     --brand-tint-0 is the "empty/none" step. */
+  --brand-tint-0: var(--surface-2);
+  --brand-tint-1: color-mix(in srgb, var(--brand) 25%, var(--surface));
+  --brand-tint-2: color-mix(in srgb, var(--brand) 50%, var(--surface));
+  --brand-tint-3: color-mix(in srgb, var(--brand) 75%, var(--surface));
+  --brand-tint-4: var(--brand);
+}
+
+:root[data-theme="dark"] {
+  --brand: #2dd4a7;
+  --brand-hover: #46e0ba;
+  --brand-soft: #14271f;
+  --brand-contrast: #05231a;
+
+  --accent: #f5b73f;
+  --accent-hover: #ffc658;
+  --accent-soft: #2c2410;
+  --accent-contrast: #221802;
+
+  --bg: #0e1512;
+  --surface: #15201b;
+  --surface-2: #1d2a23;
+  --text: #e6efe9;
+  --text-muted: #93a69c;
+  --border: #273931;
+  --grid-line: rgba(230, 239, 233, 0.05);
+
+  --success-soft: #12281d;
+  --warning-soft: #2c220f;
+  --danger-soft: #2e1716;
+}
+
+/* --- reset ---------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+/* Fluid root type: the whole rem-based scale grows on larger screens, so
+   text doesn't feel small on tablets and wide displays (~16px on phones
+   up to ~19px on desktop). Because headings are sized in rem too, they
+   scale with it and the heading/body hierarchy stays intact. */
+html {
+  font-size: clamp(1rem, 0.9rem + 0.55vw, 1.1875rem);
+}
+
+body {
+  font-family: var(--font);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--text);
+  background-color: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  /* grid-template-rows: none 1fr auto; */
+  /* margin: 0; */
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* --- typography ----------------------------------------------------- */
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.1;
+  font-weight: 700;
+  color: var(--text);
+}
+
+h1 {
+  font-size: 2.6rem;
+}
+h2 {
+  font-size: 1.95rem;
+}
+h3 {
+  font-size: 1.3rem;
+}
+
+h4 {
+  font-size: 1.05rem;
+}
+
+p,
+ul,
+ol {
+  margin-bottom: 0.9rem;
+}
+
+:where(p, li):last-child {
+  margin-bottom: 0;
+}
+
+ul,
+ol {
+  padding-left: 1.4rem;
+}
+
+li {
+  margin-bottom: 0.3rem;
+}
+
+a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--brand-hover);
+  text-decoration: underline;
+}
+
+strong,
+b {
+  font-weight: 700;
+}
+
+small {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+blockquote {
+  margin: 0 0 0.9rem;
+  padding: 0.4rem 0 0.4rem 1rem;
+  border-left: 4px solid var(--brand);
+  color: var(--text-muted);
+}
+
+hr {
+  height: 0;
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.25rem 0;
+}
+
+/* --- page chrome: header, nav, main, footer ------------------------- */
+body > header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 1rem 1.5rem;
+  text-align: center;
+}
+
+body > header h1 {
+  color: var(--text);
+  font-size: var(--text-xl);
+}
+
+/* brand "cell" mark on the wordmark — echoes the habit-grid motif */
+body > header h1::before {
+  content: "";
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-right: 0.45em;
+  border-radius: 3px;
+  background: var(--brand);
+  vertical-align: -0.04em;
+}
+
+nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0.35rem 1rem;
+}
+
+nav b {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.15rem;
+  font-weight: 400;
+  margin: 0 auto;
+}
+
+nav a {
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+nav a:hover {
+  background: var(--brand-soft);
+  color: var(--brand);
+  text-decoration: none;
+}
+
+main {
+  display: block;
+  max-width: var(--max-width);
+  margin: 2% 10%;
+  padding: 0 1rem;
+}
+
+main > h2,
+main > h1 {
+  margin-bottom: 1.25rem;
+}
+
+main > p {
+  margin-bottom: 1.25rem;
+}
+
+/* sections and top-level content blocks read as cards automatically */
+main section,
+main > div {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+main section h2,
+main section h3 {
+  margin-bottom: 0.6rem;
+}
+
+main section p + h3 {
+  margin-top: 1.25rem;
+}
+
+footer {
+  max-width: var(--max-width);
+  padding: 0 1rem 3rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  background: var(--surface);
+  margin-top: auto;
+}
+
+footer hr {
+  margin-top: 0;
+}
+
+/* --- forms ---------------------------------------------------------- */
+form > div {
+  margin-bottom: 1.1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+fieldset {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+legend {
+  font-weight: 700;
+  padding: 0 0.4rem;
+}
+
+/* --- buttons -------------------------------------------------------- */
+button,
+.btn {
+  display: inline-block;
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  padding: 0.6rem 1.15rem;
+  margin-right: 0.4rem;
+  border: 1px solid var(--brand);
+  border-radius: var(--radius);
+  background: var(--brand);
+  color: var(--brand-contrast);
+  text-decoration: none;
+  transition: filter 0.12s ease, background 0.12s ease;
+}
+
+button:hover,
+.btn:hover {
+  background: var(--brand-hover);
+  border-color: var(--brand-hover);
+  color: var(--brand-contrast);
+  text-decoration: none;
+}
+
+button:disabled,
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* reset/secondary buttons are quieter by default */
+button[type="reset"],
+.btn-secondary {
+  background: transparent;
+  color: var(--brand);
+}
+
+button[type="reset"]:hover,
+.btn-secondary:hover {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.btn-danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  filter: brightness(1.08);
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+/* warm motivational button — for celebratory moments, used sparingly */
+.btn-accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.btn-accent:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--accent-contrast);
+}
+
+/* --- tables --------------------------------------------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+caption {
+  caption-side: top;
+  text-align: left;
+  color: var(--text-muted);
+  font-style: italic;
+  padding-bottom: 0.5rem;
+}
+
+th,
+td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+thead th {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+th[scope="row"] {
+  text-align: left;
+}
+
+tbody tr:hover {
+  background: var(--surface-2);
+}
+
+/* --- progress + figures --------------------------------------------- */
+figure {
+  margin: 0 0 1rem;
+}
+
+figcaption {
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+progress {
+  width: 100%;
+  height: 0.9rem;
+  border: none;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--brand-soft);
+}
+
+progress::-webkit-progress-bar {
+  background: var(--brand-soft);
+}
+progress::-webkit-progress-value {
+  background: var(--brand);
+}
+progress::-moz-progress-bar {
+  background: var(--brand);
+}
+
+@media (max-width: 1024px) {
+  /* tablet and below */
+  main {
+    margin: 1.5rem 5%;
+  }
+  main > h2 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  /* phones: use the full width with a small margin */
+  main {
+    margin: 1rem 0;
+    padding: 0 0.75rem;
+  }
+  main section,
+  main > div {
+    padding: 1.25rem;
+  }
+}
+
+/* Stylized grid tiles
+   Put class="stat-grid" on a <ul>; each <li> becomes a tile */
+.stat-grid {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+}
+.stat-grid > li {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+.stat-grid > li:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-2px);
+}
+.stat-grid > li strong {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+@media (min-width: 601px) and (max-width: 1024px) {
+  .stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }

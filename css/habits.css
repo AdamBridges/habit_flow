@@ -11,24 +11,30 @@ main form {
   gap: var(--space-3) var(--space-4);
 }
 
-main form label {
-  margin-bottom: var(--space-1);
+main form .field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: 0;
+  flex: 1 1 12rem;
+  min-width: 0;
 }
 
-main form input,
-main form select {
-  width: auto;
+main form .field label {
+  margin-bottom: 0;
 }
 
-main form input[type="search"] {
-  flex: 1 1 14rem;
-  min-width: 12rem;
+main form .field input,
+main form .field select {
+  width: 100%;
 }
 
-/* Made the button align better with the other input objects
-   rather than the labels. */
+/* Button keeps its natural size and aligns with the bottom of the
+   inputs rather than stretching. */
 main form button {
   margin-right: 0;
+  flex: 0 0 auto;
+  align-self: end;
 }
 
 /* This is still using placeholder information. This is changed to
@@ -38,7 +44,7 @@ main form button {
   and can be appropriately toggled on or off when we implement the real functionality.*/
 main section:has(article) {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr));
   gap: var(--space-5);
   align-items: start;
 }
@@ -99,14 +105,15 @@ main section article p:last-child {
 .priority-high {
   border-left: 4px solid #e08a8a; /* pastel red */
 }
+
 .priority-medium {
   border-left: 4px solid #f0d889; /* pastel yellow */
 }
+
 .priority-low {
   border-left: 4px solid #8ecb9b; /* pastel green */
 }
 
-/* A small round label for the category mirroring the base .badge look */
 .category {
   display: inline-block;
   align-self: start;
@@ -119,4 +126,10 @@ main section article p:last-child {
   border-radius: var(--radius-full);
   background: var(--brand-soft);
   color: var(--brand);
+}
+
+main > div {
+  padding: 0;
+  border: none;
+  background: transparent;
 }
