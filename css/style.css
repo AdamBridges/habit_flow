@@ -282,6 +282,20 @@ nav a:hover {
   text-decoration: none;
 }
 
+@media (max-width: 768px) {
+  nav b,
+  nav strong {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) var(--surface);
+  }
+  nav a {
+    display: inline-block;
+  }
+}
+
 main {
   display: block;
   max-width: var(--max-width);
@@ -534,6 +548,10 @@ progress::-moz-progress-bar {
   background: var(--brand);
 }
 
+#team-habitflow {
+  text-align: center;
+  margin-bottom: 1rem;
+}
 .content-span-split {
   display: flex;
   flex-direction: column;
@@ -567,6 +585,9 @@ progress::-moz-progress-bar {
   .content-span-split > div {
     margin: 20px;
   }
+  #team-habitflow {
+    text-align: start;
+  }
 }
 @media (min-width: 1500px) {
   .content-span-split img {
@@ -583,5 +604,8 @@ progress::-moz-progress-bar {
   }
   .content-span-split > div {
     margin: 20px;
+  }
+  #team-habitflow {
+    text-align: start;
   }
 }
