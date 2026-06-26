@@ -1,7 +1,10 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Add Habit - HabitFlow</title>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <header>
@@ -20,11 +23,72 @@
     </nav>
     <main>
       <h2>Add Habit</h2>
-      <div>
+      <section>
+        <!-- right now this is just a form that doesn't go anywhere since we have no local storage yet -->
         <p>
-          ...Add Habit content goes here...
+          Create a new habit to track. Once added, it will appear on the
+          <a href="habits.html">My Habits</a> page.
         </p>
-      </div>
+
+        <form>
+          <div>
+            <label for="habitName">Habit name</label>
+            <input
+              type="text"
+              id="habitName"
+              name="habitName"
+              placeholder="e.g., Drink 2L of water"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option value="">Select a category</option>
+              <option value="Health">Health</option>
+              <option value="Productivity">Productivity</option>
+              <option value="Learning">Learning</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="6"
+              cols="50"
+              placeholder="Why this habit matters, what success looks like, etc."
+            ></textarea>
+          </div>
+
+          <div>
+            <label for="frequency">Frequency</label>
+            <select id="frequency" name="frequency">
+              <option value="Daily">Daily</option>
+              <option value="TwiceWeekly">Twice Weekly</option>
+              <option value="ThriceWeekly">Thrice Weekly</option>
+              <option value="Weekly">Weekly</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="priority">Priority</label>
+            <select id="priority" name="priority">
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+
+          <div>
+            <button type="submit">Add Habit</button>
+            <button type="reset">Clear</button>
+          </div>
+        </form>
+      </section>
     </main>
     <footer>
       <hr />
