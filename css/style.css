@@ -281,7 +281,7 @@ nav a:hover {
   color: var(--brand);
   text-decoration: none;
 }
-
+/* Enables horizontally scrollable navigation on smaller screens */
 @media (max-width: 768px) {
   nav b,
   nav strong {
@@ -552,6 +552,7 @@ progress::-moz-progress-bar {
   text-align: center;
   margin-bottom: 1rem;
 }
+/* Responsive class to help keep content appealing to digest */
 .content-span-split {
   display: flex;
   flex-direction: column;
