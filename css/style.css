@@ -318,7 +318,7 @@ main section p + h3 {
   margin-top: 1.25rem;
 }
 
-@media (max-width: var(--tablet-media-width)) {
+@media (max-width: 768px) {
   main {
     margin: 2% 0%;
   }
@@ -538,6 +538,8 @@ progress::-moz-progress-bar {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
   gap: 1rem;
 }
 .content-span-split img {
@@ -560,6 +562,7 @@ progress::-moz-progress-bar {
     grid-template-rows: auto;
     align-items: center;
     justify-content: center;
+    text-align: start;
   }
   .content-span-split > div {
     margin: 20px;
@@ -576,6 +579,7 @@ progress::-moz-progress-bar {
     grid-template-rows: auto;
     align-items: center;
     justify-content: center;
+    text-align: start;
   }
   .content-span-split > div {
     margin: 20px;
