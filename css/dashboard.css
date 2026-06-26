@@ -1,0 +1,207 @@
+main section:nth-of-type(1) ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+}
+
+main section:nth-of-type(1) li {
+  margin: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  /* the label ("Current streak:") sits above its value */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* the <strong> is the label — make it the small muted caption on top */
+main section:nth-of-type(1) li strong {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* --- 2. Today's Habits: a real checklist ---------------------------- */
+/* 2nd <section>. Each habit is a <p> wrapping a checkbox + label. We
+   turn each <p> into a tappable row with a clear hit area. */
+main section:nth-of-type(2) form p {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--border);
+}
+main section:nth-of-type(2) form p:first-of-type {
+  border-top: 1px solid var(--border);
+}
+
+/* checkbox: size it up and paint it brand green when checked.
+   accent-color is the modern, no-JS way to recolor a native checkbox. */
+main section:nth-of-type(2) input[type="checkbox"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;     /* don't stretch to flow.css's width:100% on inputs */
+  accent-color: var(--brand);
+  cursor: pointer;
+}
+
+/* the label sits right after the checkbox; flow.css makes labels block +
+   bold, so we relax that here and let it fill the row */
+main section:nth-of-type(2) label {
+  margin: 0;
+  font-weight: 500;
+  cursor: pointer;
+  flex: 1;
+}
+
+/* completed habit: mute + strike-through so done items recede.
+   `input:checked + label` = "the label immediately after a checked box". */
+main section:nth-of-type(2) input[type="checkbox"]:checked + label {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+/* the (Health)/(Learning) category tag → a small pill */
+main section:nth-of-type(2) form p em {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--brand);
+  background: var(--brand-soft);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+main section:nth-of-type(2) form button {
+  margin-top: var(--space-4);
+}
+
+/* --- 3. Habit Performance: spacing for the two ranked lists --------- */
+main section:nth-of-type(3) h4 {
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-2);
+}
+main section:nth-of-type(3) ol {
+  margin-bottom: 0;
+}
+main section:nth-of-type(3) li {
+  font-variant-numeric: tabular-nums; /* keeps the % figures aligned */
+  margin-bottom: var(--space-2);
+}
+
+/* --- 4. Recent Activity: make the table feel like a heatmap grid ---- */
+/* 4th <section>. The HTML uses border="1" cellpadding="6"; we override
+   that inline styling with a clean, square, graph-paper look. */
+main section:nth-of-type(4) table {
+  border-collapse: separate;
+  border-spacing: 4px;       /* gaps between cells = contribution-grid feel */
+  table-layout: fixed;
+}
+
+main section:nth-of-type(4) td {
+  border: 1px solid var(--border);
+  width: 3rem;
+  height: 3rem;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  background: var(--brand-tint-0);  /* "empty" step from flow.css */
+  border-radius: var(--radius-sm);
+}
+
+/* day-of-week row headers, quieter than thead */
+main section:nth-of-type(4) tbody th {
+  background: var(--surface);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+/* --- 4b. Recent Activity heatmap — HARDCODED placeholder shading ----
+   Pure CSS can't read a cell's number, so we color cells by POSITION to
+   match the placeholder data already in the HTML. Cells are counted with
+   nth-child: the row header <th> is child 1, so Week 1–4 are children 2–5.
+   Rows (tbody tr): 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat 7=Sun.
+   Intensity ramp comes from flow.css: tint-0(0) tint-2(1) tint-3(2) tint-4(3).
+   A value of 0 needs no rule — it keeps the default --brand-tint-0.
+   When you wire up real data later, delete this block and use the
+   data-count version instead. */
+
+#act { /* shorthand only used in comments; selectors are written in full below */ }
+
+/* value = 1  → --brand-tint-2 */
+main section:nth-of-type(4) tbody tr:nth-child(2) td:nth-child(2), /* Tue W1 */
+main section:nth-of-type(4) tbody tr:nth-child(4) td:nth-child(4), /* Thu W3 */
+main section:nth-of-type(4) tbody tr:nth-child(6) td:nth-child(3), /* Sat W2 */
+main section:nth-of-type(4) tbody tr:nth-child(6) td:nth-child(5), /* Sat W4 */
+main section:nth-of-type(4) tbody tr:nth-child(7) td:nth-child(2)  /* Sun W1 */ {
+  background: var(--brand-tint-2);
+}
+
+/* value = 2  → --brand-tint-3 */
+main section:nth-of-type(4) tbody tr:nth-child(1) td:nth-child(3), /* Mon W2 */
+main section:nth-of-type(4) tbody tr:nth-child(1) td:nth-child(5), /* Mon W4 */
+main section:nth-of-type(4) tbody tr:nth-child(2) td:nth-child(4), /* Tue W3 */
+main section:nth-of-type(4) tbody tr:nth-child(3) td:nth-child(2), /* Wed W1 */
+main section:nth-of-type(4) tbody tr:nth-child(4) td:nth-child(5), /* Thu W4 */
+main section:nth-of-type(4) tbody tr:nth-child(5) td:nth-child(2), /* Fri W1 */
+main section:nth-of-type(4) tbody tr:nth-child(5) td:nth-child(3), /* Fri W2 */
+main section:nth-of-type(4) tbody tr:nth-child(6) td:nth-child(4), /* Sat W3 */
+main section:nth-of-type(4) tbody tr:nth-child(7) td:nth-child(3), /* Sun W2 */
+main section:nth-of-type(4) tbody tr:nth-child(7) td:nth-child(5)  /* Sun W4 */ {
+  background: var(--brand-tint-3);
+}
+
+/* value = 3  → --brand-tint-4 (full brand) + readable text */
+main section:nth-of-type(4) tbody tr:nth-child(1) td:nth-child(2), /* Mon W1 */
+main section:nth-of-type(4) tbody tr:nth-child(1) td:nth-child(4), /* Mon W3 */
+main section:nth-of-type(4) tbody tr:nth-child(2) td:nth-child(3), /* Tue W2 */
+main section:nth-of-type(4) tbody tr:nth-child(2) td:nth-child(5), /* Tue W4 */
+main section:nth-of-type(4) tbody tr:nth-child(3) td:nth-child(4), /* Wed W3 */
+main section:nth-of-type(4) tbody tr:nth-child(3) td:nth-child(5), /* Wed W4 */
+main section:nth-of-type(4) tbody tr:nth-child(4) td:nth-child(2), /* Thu W1 */
+main section:nth-of-type(4) tbody tr:nth-child(4) td:nth-child(3), /* Thu W2 */
+main section:nth-of-type(4) tbody tr:nth-child(5) td:nth-child(4), /* Fri W3 */
+main section:nth-of-type(4) tbody tr:nth-child(5) td:nth-child(5), /* Fri W4 */
+main section:nth-of-type(4) tbody tr:nth-child(7) td:nth-child(4)  /* Sun W3 */ {
+  background: var(--brand-tint-4);
+  color: var(--brand-contrast);
+}
+
+/* --- 4c. Heatmap legend (Less → More) ------------------------------- */
+/* A row of swatches that mirror the 0–3 intensity steps, so anyone
+   reading the grid knows what the shades mean. The .legend-cell spans
+   are colored the same way as the table cells, via data-count. */
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  margin-bottom: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.heatmap-legend .legend-cell {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--brand-tint-0); /* default = the "0 / empty" step */
+}
+
+/* same ramp the cells use, keyed off data-count */
+.heatmap-legend .legend-cell[data-count="1"] { background: var(--brand-tint-2); }
+.heatmap-legend .legend-cell[data-count="2"] { background: var(--brand-tint-3); }
+.heatmap-legend .legend-cell[data-count="3"] { background: var(--brand-tint-4); }
