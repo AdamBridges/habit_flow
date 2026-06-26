@@ -82,6 +82,8 @@
   --brand-tint-2: color-mix(in srgb, var(--brand) 50%, var(--surface));
   --brand-tint-3: color-mix(in srgb, var(--brand) 75%, var(--surface));
   --brand-tint-4: var(--brand);
+  --tablet-media-width: 768px;
+  --desktop-media-width: 1280px;
 }
 
 :root[data-theme="dark"] {
@@ -256,7 +258,8 @@ nav {
   padding: 0.35rem 1rem;
 }
 
-nav b, nav strong {
+nav b,
+nav strong {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -315,7 +318,7 @@ main section p + h3 {
   margin-top: 1.25rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: var(--tablet-media-width)) {
   main {
     margin: 2% 0%;
   }
@@ -398,7 +401,9 @@ button,
   background: var(--brand);
   color: var(--brand-contrast);
   text-decoration: none;
-  transition: filter 0.12s ease, background 0.12s ease;
+  transition:
+    filter 0.12s ease,
+    background 0.12s ease;
 }
 
 button:hover,
@@ -530,45 +535,49 @@ progress::-moz-progress-bar {
 }
 
 .content-span-split {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
 }
-@media (min-width: 800px) {
-   .content-span-split img {
-      width: 25vw;
-      height: 25vw;
-      max-width: 250px;
-      max-height: 250px;
-      margin: 20px;
-   }
-   .content-span-split {
-      display: grid;
-      grid-template-columns: 250px 1fr;
-      grid-template-rows: auto;
-      align-items: center;
-      justify-content: center;
-   }
-   .content-span-split > div {
-      margin: 20px;
-   }
+.content-span-split img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 250px;
+  max-height: 250px;
+}
+@media (min-width: 768px) {
+  .content-span-split img {
+    width: 25vw;
+    height: 25vw;
+    margin: 20px;
+  }
+  .content-span-split {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: auto;
+    align-items: center;
+    justify-content: center;
+  }
+  .content-span-split > div {
+    margin: 20px;
+  }
 }
 @media (min-width: 1500px) {
-   .content-span-split img {
-      width: 25vw;
-      height: 25vw;
-      max-width: 250px;
-      max-height: 250px;
-   }
-   .content-span-split {
-      display: grid;
-      grid-template-columns: 250px 1fr 250px 1fr;
-      grid-template-rows: auto;
-      align-items: center;
-      justify-content: center;
-   }
-   .content-span-split > div {
-      margin: 20px;
-   }
+  .content-span-split img {
+    width: 25vw;
+    height: 25vw;
+  }
+  .content-span-split {
+    display: grid;
+    grid-template-columns: 250px 1fr 250px 1fr;
+    grid-template-rows: auto;
+    align-items: center;
+    justify-content: center;
+  }
+  .content-span-split > div {
+    margin: 20px;
+  }
 }
