@@ -256,7 +256,7 @@ nav {
   padding: 0.35rem 1rem;
 }
 
-nav b {
+nav b, nav strong {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -522,4 +522,48 @@ progress::-webkit-progress-value {
 }
 progress::-moz-progress-bar {
   background: var(--brand);
+}
+
+.content-span-split {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   gap: 1rem;
+}
+@media (min-width: 800px) {
+   .content-span-split img {
+      width: 25vw;
+      height: 25vw;
+      max-width: 250px;
+      max-height: 250px;
+      margin: 20px;
+   }
+   .content-span-split {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      grid-template-rows: auto;
+      align-items: center;
+      justify-content: center;
+   }
+   .content-span-split > div {
+      margin: 20px;
+   }
+}
+@media (min-width: 1500px) {
+   .content-span-split img {
+      width: 25vw;
+      height: 25vw;
+      max-width: 250px;
+      max-height: 250px;
+   }
+   .content-span-split {
+      display: grid;
+      grid-template-columns: 250px 1fr 250px 1fr;
+      grid-template-rows: auto;
+      align-items: center;
+      justify-content: center;
+   }
+   .content-span-split > div {
+      margin: 20px;
+   }
 }
