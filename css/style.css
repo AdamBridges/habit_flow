@@ -118,7 +118,6 @@ body {
   line-height: 1.65;
   color: var(--text);
   background-color: var(--bg);
-  -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -153,9 +152,11 @@ h4 {
 h1 {
   font-size: 2.6rem;
 }
+
 h2 {
   font-size: 1.95rem;
 }
+
 h3 {
   font-size: 1.3rem;
 }
@@ -219,20 +220,20 @@ hr {
 }
 
 /* --- page chrome: header, nav, main, footer ------------------------- */
-body > header {
+body>header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding: 2rem 1rem 1.5rem;
   text-align: center;
 }
 
-body > header h1 {
+body>header h1 {
   color: var(--text);
   font-size: var(--text-xl);
 }
 
 /* brand "cell" mark on the wordmark — echoes the habit-grid motif */
-body > header h1::before {
+body>header h1::before {
   content: "";
   display: inline-block;
   width: 0.7em;
@@ -273,8 +274,10 @@ nav a:hover {
   color: var(--brand);
   text-decoration: none;
 }
+
 /* Enables horizontally scrollable navigation on smaller screens */
 @media (max-width: 768px) {
+
   nav b,
   nav strong {
     display: block;
@@ -283,6 +286,7 @@ nav a:hover {
     scrollbar-width: thin;
     scrollbar-color: var(--border) var(--surface);
   }
+
   nav a {
     display: inline-block;
   }
@@ -295,18 +299,18 @@ main {
   padding: 0 1rem;
 }
 
-main > h2,
-main > h1 {
+main>h2,
+main>h1 {
   margin-bottom: 1.25rem;
 }
 
-main > p {
+main>p {
   margin-bottom: 1.25rem;
 }
 
 /* sections and top-level content blocks read as cards automatically */
 main section,
-main > div {
+main>div {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -320,8 +324,66 @@ main section h3 {
   margin-bottom: 0.6rem;
 }
 
-main section p + h3 {
+main section p+h3 {
   margin-top: 1.25rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--space-4);
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  height: 100%;
+  padding: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+
+.card:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-2px);
+}
+
+.card-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.card-value {
+  display: block;
+  color: var(--text);
+  font-size: var(--text-xl);
+  line-height: 1.15;
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: var(--brand-soft);
+  color: var(--brand);
 }
 
 @media (max-width: 768px) {
@@ -352,7 +414,7 @@ footer hr {
 }
 
 /* --- forms ---------------------------------------------------------- */
-form > div {
+form>div {
   margin-bottom: 1.1rem;
 }
 
@@ -422,7 +484,7 @@ button,
 button:hover,
 .btn:hover {
   background: var(--brand-hover);
-  border-color: var(--brand-hover);
+  border: 1px solid var(--brand-hover);
   color: var(--brand-contrast);
   text-decoration: none;
 }
@@ -448,7 +510,7 @@ button[type="reset"]:hover,
 
 .btn-ghost {
   background: transparent;
-  border-color: transparent;
+  border: 1px solid transparent;
   color: var(--text);
 }
 
@@ -459,26 +521,26 @@ button[type="reset"]:hover,
 
 .btn-danger {
   background: var(--danger);
-  border-color: var(--danger);
+  border: 1px solid var(--danger);
   color: #fff;
 }
 
 .btn-danger:hover {
   filter: brightness(1.08);
   background: var(--danger);
-  border-color: var(--danger);
+  border: 1px solid var(--danger);
 }
 
 /* warm motivational button — for celebratory moments, used sparingly */
 .btn-accent {
   background: var(--accent);
-  border-color: var(--accent);
+  border: 1px solid var(--accent);
   color: var(--accent-contrast);
 }
 
 .btn-accent:hover {
   background: var(--accent-hover);
-  border-color: var(--accent-hover);
+  border: 1px solid var(--accent-hover);
   color: var(--accent-contrast);
 }
 
@@ -514,6 +576,10 @@ th[scope="row"] {
   text-align: left;
 }
 
+tbody tr {
+  transition: background 0.12s ease;
+}
+
 tbody tr:hover {
   background: var(--surface-2);
 }
@@ -521,6 +587,15 @@ tbody tr:hover {
 /* --- progress + figures --------------------------------------------- */
 figure {
   margin: 0 0 1rem;
+  padding: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.12s ease;
+}
+
+figure:hover {
+  border-color: var(--text-muted);
 }
 
 figcaption {
@@ -535,14 +610,21 @@ progress {
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--brand-soft);
+  transition: filter 0.12s ease;
+}
+
+progress:hover {
+  filter: brightness(1.04);
 }
 
 progress::-webkit-progress-bar {
   background: var(--brand-soft);
 }
+
 progress::-webkit-progress-value {
   background: var(--brand);
 }
+
 progress::-moz-progress-bar {
   background: var(--brand);
 }
@@ -585,10 +667,28 @@ progress::-moz-progress-bar {
     grid-template-columns: 1fr 1fr;
   }
 }
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* --- callouts ------------------------------------------------------- */
+.callout {
+  background: var(--brand-soft);
+  border-left: 4px solid var(--brand);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  color: var(--text);
+}
+
 #team-habitflow {
   text-align: center;
   margin-bottom: 1rem;
 }
+
 /* Responsive class to help keep content appealing to digest */
 .content-span-split {
   display: flex;
@@ -598,6 +698,7 @@ progress::-moz-progress-bar {
   text-align: center;
   gap: 1rem;
 }
+
 .content-span-split img {
   display: flex;
   flex-direction: column;
@@ -606,12 +707,14 @@ progress::-moz-progress-bar {
   max-width: 250px;
   max-height: 250px;
 }
+
 @media (min-width: 768px) {
   .content-span-split img {
     width: 25vw;
     height: 25vw;
     margin: 20px;
   }
+
   .content-span-split {
     display: grid;
     grid-template-columns: 250px 1fr;
@@ -620,18 +723,22 @@ progress::-moz-progress-bar {
     justify-content: center;
     text-align: start;
   }
-  .content-span-split > div {
+
+  .content-span-split>div {
     margin: 20px;
   }
+
   #team-habitflow {
     text-align: start;
   }
 }
+
 @media (min-width: 1500px) {
   .content-span-split img {
     width: 25vw;
     height: 25vw;
   }
+
   .content-span-split {
     display: grid;
     grid-template-columns: 250px 1fr 250px 1fr;
@@ -640,9 +747,11 @@ progress::-moz-progress-bar {
     justify-content: center;
     text-align: start;
   }
-  .content-span-split > div {
+
+  .content-span-split>div {
     margin: 20px;
   }
+
   #team-habitflow {
     text-align: start;
   }
