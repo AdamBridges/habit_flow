@@ -328,6 +328,13 @@ main section p + h3 {
   main {
     margin: 2% 0%;
   }
+  main > h2 {
+    text-align: center;
+  }
+  main section,
+  main > div {
+    padding: 1.25rem;
+  }
 }
 
 footer {
@@ -538,28 +545,6 @@ progress::-webkit-progress-value {
 }
 progress::-moz-progress-bar {
   background: var(--brand);
-}
-
-@media (max-width: 1024px) {
-  /* tablet and below */
-  main {
-    margin: 1.5rem 5%;
-  }
-  main > h2 {
-    text-align: center;
-  }
-}
-
-@media (max-width: 600px) {
-  /* phones: use the full width with a small margin */
-  main {
-    margin: 1rem 0;
-    padding: 0 0.75rem;
-  }
-  main section,
-  main > div {
-    padding: 1.25rem;
-  }
 }
 
 /* Stylized grid tiles
