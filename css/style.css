@@ -1,16 +1,3 @@
-/* ===================================================================
-   FlowCSS — HabitFlow's opinionated house theme
-   -------------------------------------------------------------------
-   Plug and play: link this one file, write plain semantic HTML, and
-   every page lands on the same look automatically. There is nothing
-   to remember and no classes to apply for the common case — that is
-   how a site built by many people stays consistent.
-
-   Need a variant the markup can't imply (a secondary button, a
-   callout, a badge)? Use one of the small opt-in classes at the
-   bottom. Everything else is driven by the element you choose.
-   =================================================================== */
-
 :root {
   --font: Helvetica, Arial, sans-serif;
   --font-mono: Arial, sans-serif, monospace;
@@ -119,6 +106,10 @@
 
 * {
   margin: 0;
+}
+
+html {
+  font-size: clamp(1rem, 0.9rem + 0.55vw, 1.1875rem);
 }
 
 body {
@@ -265,6 +256,7 @@ nav strong {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.15rem;
+  font-weight: 400;
   margin: 0 auto;
 }
 
@@ -397,6 +389,13 @@ main section p+h3 {
 @media (max-width: 768px) {
   main {
     margin: 2% 0%;
+  }
+  main > h2 {
+    text-align: center;
+  }
+  main section,
+  main > div {
+    padding: 1.25rem;
   }
 }
 
@@ -630,6 +629,44 @@ progress::-moz-progress-bar {
   background: var(--brand);
 }
 
+/* Stylized grid tiles
+   Put class="stat-grid" on a <ul>; each <li> becomes a tile */
+.stat-grid {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+}
+.stat-grid > li {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+.stat-grid > li:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-2px);
+}
+.stat-grid > li strong {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+@media (min-width: 601px) and (max-width: 1024px) {
+  .stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 @media (max-width: 768px) {
   table {
     display: block;

@@ -1,0 +1,175 @@
+/* ===================================================================
+   dashboard.css — page-specific layer for dashboard.html
+   -------------------------------------------------------------------
+   Loads after style.css and reuses its tokens. style.css owns the
+   responsive page margins, the centered page title, and the reusable
+   .stat-grid component (the Overview list).
+
+   Sections are targeted by semantic classes (.today / .performance /
+   .activity) instead of position, so reordering them can't break the
+   styling. The heatmap is a .heatmap table whose cells are colored by a
+   data-level attribute, so the intensity shading is four rules rather
+   than dozens of position selectors.
+   =================================================================== */
+
+/* This page wraps its sections in one extra <div>; flatten it so the
+   sections themselves are the cards. */
+main > div {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+/* Overview (.overview) is styled by the shared .stat-grid component. */
+
+/* --- Today's Habits: checklist -------------------------------------- */
+.today form p {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s ease;
+}
+.today form p:first-of-type {
+  border-top: 1px solid var(--border);
+}
+/* row highlight on hover so the checklist feels interactive */
+.today form p:hover {
+  background: var(--surface-2);
+}
+.today input[type="checkbox"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+  accent-color: var(--brand);
+  cursor: pointer;
+}
+/* min-width: 0 lets the label shrink and wrap so the category pill can
+   never push past the row edge. */
+.today label {
+  margin: 0;
+  font-weight: 500;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+.today input[type="checkbox"]:checked + label {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+.today form p em {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--brand);
+  background: var(--brand-soft);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+/* --- Habit Performance ---------------------------------------------- */
+.performance h4 {
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-2);
+}
+.performance ol {
+  margin-bottom: 0;
+}
+.performance li {
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--space-2);
+}
+
+/* --- Recent Activity: contribution heatmap --------------------------
+   .heatmap fills the card and scales with it; below min-width the
+   .heatmap-scroll wrapper scrolls instead of squashing. Cells carry a
+   data-level (0-3) for color and a title attribute for the count, shown
+   as a tooltip on hover. */
+.heatmap-scroll {
+  overflow-x: auto;
+}
+.heatmap {
+  width: 100%;
+  min-width: 20rem;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: var(--space-1);
+}
+.heatmap thead th:first-child,
+.heatmap tbody th {
+  width: 3rem;
+}
+.heatmap thead th,
+.heatmap tbody th {
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 400;
+}
+.heatmap thead th {
+  padding: 0 0 var(--space-2);
+}
+.heatmap tbody th {
+  text-align: right;
+  padding: 0 var(--space-2) 0 0;
+}
+.heatmap td {
+  height: clamp(1.8rem, 5vw, 3rem);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: transform 0.12s ease;
+}
+/* hovered cell grows into the gap so it looks "selected" and breathing.
+   transform is visual-only, so neighbours don't shift; z-index lifts the
+   cell above them while it's scaled. Pairs with the title-tooltip count. */
+.heatmap td:hover {
+  transform: scale(1.08);
+  z-index: 1;
+  cursor: pointer;
+}
+
+/* Intensity scale, shared by the heatmap cells and the legend swatches:
+   four rules instead of one per cell. data-level 0 is the default. */
+.heatmap td,
+.heatmap-legend .legend-cell {
+  background: var(--brand-tint-0);
+}
+.heatmap td[data-level="1"],
+.heatmap-legend .legend-cell[data-level="1"] { background: var(--brand-tint-2); }
+.heatmap td[data-level="2"],
+.heatmap-legend .legend-cell[data-level="2"] { background: var(--brand-tint-3); }
+.heatmap td[data-level="3"],
+.heatmap-legend .legend-cell[data-level="3"] { background: var(--brand-tint-4); }
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  margin-bottom: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.heatmap-legend .legend-cell {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+/* --- page-specific responsive tweak --------------------------------- */
+@media (max-width: 600px) {
+  /* nudge the performance lines down a touch so each fits on one line */
+  .performance li {
+    font-size: 0.8rem;
+  }
+}
