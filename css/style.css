@@ -69,8 +69,6 @@
   --brand-tint-2: color-mix(in srgb, var(--brand) 50%, var(--surface));
   --brand-tint-3: color-mix(in srgb, var(--brand) 75%, var(--surface));
   --brand-tint-4: var(--brand);
-  --tablet-media-width: 768px;
-  --desktop-media-width: 1280px;
 }
 
 :root[data-theme="dark"] {
@@ -121,8 +119,6 @@ body {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  /* grid-template-rows: none 1fr auto; */
-  /* margin: 0; */
 }
 
 img,
@@ -328,65 +324,20 @@ main section p+h3 {
   margin-top: 1.25rem;
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-  gap: var(--space-4);
-  align-items: stretch;
+@media (max-width: 768px) and (orientation: portrait) {
+  main {
+    margin: 2% 0%;
+  }
+  main > h2 {
+    text-align: center;
+  }
+  main section,
+  main > div {
+    padding: 1.25rem;
+  }
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  height: 100%;
-  padding: var(--space-4);
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  transition: border-color 0.12s ease, transform 0.12s ease;
-}
-
-.card:hover {
-  border-color: var(--text-muted);
-  transform: translateY(-2px);
-}
-
-.card-label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.card-value {
-  display: block;
-  color: var(--text);
-  font-size: var(--text-xl);
-  line-height: 1.15;
-}
-
-.card p {
-  color: var(--text-muted);
-  font-size: var(--text-sm);
-}
-
-.badge {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--radius-full);
-  background: var(--brand-soft);
-  color: var(--brand);
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1024px) and (orientation: landscape) {
   main {
     margin: 2% 0%;
   }
@@ -669,7 +620,6 @@ progress::-moz-progress-bar {
 }
 @media (max-width: 768px) {
   table {
-    display: block;
     overflow-x: auto;
     white-space: nowrap;
   }
@@ -755,4 +705,62 @@ progress::-moz-progress-bar {
   #team-habitflow {
     text-align: start;
   }
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--space-4);
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  height: 100%;
+  padding: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+
+.card:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-2px);
+}
+
+.card-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.card-value {
+  display: block;
+  color: var(--text);
+  font-size: var(--text-xl);
+  line-height: 1.15;
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: var(--brand-soft);
+  color: var(--brand);
 }
