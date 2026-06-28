@@ -554,6 +554,15 @@ progress::-moz-progress-bar {
   background: var(--brand);
 }
 
+/* --- callouts ------------------------------------------------------- */
+.callout {
+  background: var(--brand-soft);
+  border-left: 4px solid var(--brand);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  color: var(--text);
+}
+
 #team-habitflow {
   text-align: center;
   margin-bottom: 1rem;
