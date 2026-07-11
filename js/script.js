@@ -42,9 +42,7 @@ function loadHabits() {
   const stored = localStorage.getItem(HABITS_KEY);
   console.log("Habits loaded from localStorage:", stored);
   if (stored) {
-    return JSON.parse(stored).map(
-        habit => new Habit(habit.name, habit.frequency, habit.startDate)
-    );
+    return JSON.parse(stored).map(habit => new Habit(habit));
   }
   return [];
 }
@@ -63,38 +61,71 @@ function isValidEmail(email) {
 // The following classes are used throughout the application to represent and manage habit objects. Additional classes can be added here as needed for future features or functionality.
 
 /**
- * Represents a habit with a name, frequency, and start date.
+ * Represents a habit the user is tracking.
  * Use this class to create and manage habit objects that are saved/retrieved from localStorage.
  */
 class Habit {
 
-/**
- * The name of the habit.
- * @type {string}
- */
-name;
+  /**
+   * Unique, sequential identifier for the habit.
+   * @type {number}
+   */
+  id;
 
-/**
- * The frequency of the habit.
- * @type {number}
- */
-frequency;
+  /**
+   * The name of the habit.
+   * @type {string}
+   */
+  name;
 
-/**
- * The start date of the habit.
- * @type {string}
- */
-startDate;
+  /**
+   * The category of the habit (e.g. "Health", "Productivity", "Learning", "Other").
+   * @type {string}
+   */
+  category;
 
-/**
- * Creates a new Habit instance.
- * @param {string} name 
- * @param {number} frequency 
- * @param {string} startDate 
- */
-  constructor(name, frequency, startDate) {
+  /**
+   * A free-text description of the habit. May be an empty string.
+   * @type {string}
+   */
+  description;
+
+  /**
+   * How often the habit should be done ("Daily", "TwiceWeekly", "ThriceWeekly", "Weekly").
+   * @type {string}
+   */
+  frequency;
+
+  /**
+   * The priority of the habit ("Low", "Medium", "High").
+   * @type {string}
+   */
+  priority;
+
+  /**
+   * The start date of the habit in YYYY-MM-DD format.
+   * @type {string}
+   */
+  startDate;
+
+  /**
+   * Creates a new Habit instance
+   * @param {Object} habit
+   * @param {number} habit.id
+   * @param {string} habit.name
+   * @param {string} habit.category
+   * @param {string} habit.description
+   * @param {string} habit.frequency
+   * @param {string} habit.priority
+   * @param {string} habit.startDate
+   */
+  constructor({ id, name, category, description, frequency, priority, startDate }) {
+    this.id = id;
     this.name = name;
+    this.category = category;
+    this.description = description;
     this.frequency = frequency;
+    this.priority = priority;
     this.startDate = startDate;
   }
 
