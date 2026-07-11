@@ -6,6 +6,7 @@
     <title>Add Habit - HabitFlow</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" defer></script>
+    <script src="js/add_habit.js" defer></script>
   </head>
   <body>
     <header>
@@ -32,7 +33,7 @@
           <a href="habits.html">My Habits</a> page.
         </p>
 
-        <form>
+        <form id="add-habit-form">
           <div>
             <label for="habitName">Habit name</label>
             <input
@@ -88,6 +89,8 @@
             <button type="submit">Add Habit</button>
             <button type="reset">Clear</button>
           </div>
+
+          <p id="form-message" role="status" aria-live="polite" hidden></p>
         </form>
       </section>
     </main>
