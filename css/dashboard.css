@@ -118,6 +118,13 @@ main > div {
 .heatmap-legend .legend-cell {
   background: var(--brand-tint-0);
 }
+.heatmap td.future {
+  opacity: 0.35;
+}
+.heatmap td.future:hover {
+  transform: none;
+  cursor: default;
+}
 .heatmap td[data-level="1"],
 .heatmap-legend .legend-cell[data-level="1"] { background: var(--brand-tint-2); }
 .heatmap td[data-level="2"],
@@ -141,7 +148,9 @@ main > div {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
 }
+
 @media (max-width: 600px) {
+  .heatmap-legend {
     font-size: 0.8rem;
   }
 }
