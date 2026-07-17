@@ -47,8 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    showMessage(SAVED_CHANGES_MESSAGE);
-    form.reset();
+    // Flash the confirmation as a popup then when user hits ok go to habit page
+    alert(SAVED_CHANGES_MESSAGE);
+    window.location.href = "habits.html";
   });
 
   /**
