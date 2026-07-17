@@ -1,8 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
   const listSection = document.getElementById("habits-list");
   const noMatchSection = document.getElementById("habits-none-match");
   const emptySection = document.getElementById("habits-empty");
-  const filterForm = document.getElementById("filter-form");
   const searchInput = document.getElementById("searchInput");
   const categoryFilter = document.getElementById("categoryFilter");
 
@@ -17,18 +16,25 @@ document.addEventListener("DOMContentLoaded", () => {
     Weekly: "Weekly",
   };
 
-  
   const PRIORITY_CLASSES = {
     Low: "priority-low",
     Medium: "priority-medium",
     High: "priority-high",
   };
-  
+
+  /**
+   * Removes every habit card currently rendered in the list section.
+   */
+  function clearHabitCards() {
+    listSection.querySelectorAll("article").forEach((article) => article.remove());
+  }
+
   function render() {
     const allHabits = loadHabits();
 
-    
+    // Case 1: the user has no habits
     if (allHabits.length === 0) {
+      clearHabitCards();
       listSection.hidden = true;
       noMatchSection.hidden = true;
       emptySection.hidden = false;
@@ -36,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     emptySection.hidden = true;
 
-    
     const searchText = (searchInput?.value || "").trim().toLowerCase();
     const selectedCategory = categoryFilter?.value || "all";
 
@@ -48,17 +53,19 @@ document.addEventListener("DOMContentLoaded", () => {
       return matchesSearch && matchesCategory;
     });
 
-    
+    // Case 2: the user has habits, but none match the current search/filter
     if (visibleHabits.length === 0) {
+      clearHabitCards();
       listSection.hidden = true;
       noMatchSection.hidden = false;
       return;
     }
+
+    // Case 3: the user has habits to show
     noMatchSection.hidden = true;
     listSection.hidden = false;
 
-    
-    listSection.querySelectorAll("article").forEach((article) => article.remove());
+    clearHabitCards();
 
     const today = getTodayDate();
     visibleHabits.forEach((habit) => {
@@ -81,7 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
     title.textContent = habit.name;
     article.appendChild(title);
 
-    
     const categoryLine = document.createElement("p");
     const categoryLabel = document.createElement("strong");
     categoryLabel.textContent = "Category: ";
@@ -91,14 +97,12 @@ document.addEventListener("DOMContentLoaded", () => {
     categoryLine.append(categoryLabel, categoryPill);
     article.appendChild(categoryLine);
 
-    
     if (habit.description) {
       const desc = document.createElement("p");
       desc.textContent = habit.description;
       article.appendChild(desc);
     }
 
-    
     const meta = document.createElement("p");
     const freqLabel = document.createElement("strong");
     freqLabel.textContent = "Frequency: ";
@@ -112,12 +116,11 @@ document.addEventListener("DOMContentLoaded", () => {
       habit.priority || "Medium"
     );
     article.appendChild(meta);
-    
+
     const toggle = document.createElement("button");
     toggle.type = "button";
     toggle.className = "done-toggle";
 
-    
     function paintToggle(done) {
       toggle.textContent = done ? "✓ Completed" : "Complete?";
       toggle.setAttribute("aria-pressed", String(done));
@@ -136,16 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return article;
   }
 
-  
   searchInput?.addEventListener("input", render);
   categoryFilter?.addEventListener("change", render);
 
-  
-  filterForm?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    render();
-  });
-
-  
   render();
-});
+})();

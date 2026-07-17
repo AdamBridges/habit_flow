@@ -31,7 +31,7 @@ const EMAIL_FAILURE_MESSAGE = "Sorry, there was an error sending your message. P
  * @returns {string} - Today's date in YYYY-MM-DD format.
  */
 function getTodayDate() {
-  return new Date().toLocaleDateString().split("T")[0];
+  return new Date().toISOString().split("T")[0];
 }
 
 /**
