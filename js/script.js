@@ -6,13 +6,6 @@
  */
 const HABITS_KEY = "habitflow_habits";
 
-/**
- * This key is used to store and retrieve the completions object from localStorage.
- * Completions record WHICH habits were checked off on WHICH day. The shape is:
- *   { "2026-07-11": [1, 3], "2026-07-10": [1] }
- * i.e. an object where each key is a date (YYYY-MM-DD) and the value is an
- * array of habit ids that were completed on that day.
- */
 const COMPLETIONS_KEY = "habitflow_completions";
 
 const SAVED_CHANGES_MESSAGE = "Your changes have been saved!";

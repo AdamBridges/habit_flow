@@ -49,7 +49,7 @@ main section:has(article) {
   align-items: start;
 }
 
-main section:has(article) > h2 {
+main section:has(article) > h3 {
   grid-column: 1 / -1;
   margin-bottom: 0;
 }
