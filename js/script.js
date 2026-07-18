@@ -33,7 +33,6 @@ function getTodayDate() {
  */
 function saveHabits(habits) {
   localStorage.setItem(HABITS_KEY, JSON.stringify(habits));
-  console.log("Habits saved to localStorage:", habits);
 }
 
 /**
@@ -42,7 +41,6 @@ function saveHabits(habits) {
  */
 function loadHabits() {
   const stored = localStorage.getItem(HABITS_KEY);
-  console.log("Habits loaded from localStorage:", stored);
   if (stored) {
     return JSON.parse(stored).map(habit => new Habit(habit));
   }
