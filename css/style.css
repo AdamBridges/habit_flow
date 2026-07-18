@@ -529,6 +529,16 @@ table {
   font-size: 0.95rem;
 }
 
+.table-scroll {
+  max-width: 100%;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.table-scroll table {
+  margin: 0;
+}
+
 caption {
   caption-side: top;
   text-align: left;
@@ -741,8 +751,7 @@ progress::-moz-progress-bar {
   }
 }
 @media (max-width: 768px) {
-  table {
-    overflow-x: auto;
+  .table-scroll table {
     white-space: nowrap;
   }
 }

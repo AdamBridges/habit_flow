@@ -111,6 +111,12 @@
     return normalizeDate(habit.startDate);
   }
 
+  /**
+   * Calculates completion over an inclusive reporting period. The effective
+   * start is the later of the requested start date and habit.startDate, so
+   * dates before habit creation never count as missed. Callers cap current
+   * reporting periods at today.
+   */
   function getCompletionStats(habit, startDate, endDate, completions) {
     const habitStartDate = getHabitStartDate(habit);
     const effectiveStart = habitStartDate && habitStartDate > startDate
@@ -130,6 +136,10 @@
     };
   }
 
+  /**
+   * Calculates streaks on or after the habit's start date. A streak ending
+   * yesterday remains current until the user has a chance to check in today.
+   */
   function getStreakStats(habit, today, completions) {
     const habitStartDate = getHabitStartDate(habit);
     const completedDates = Object.keys(completions)

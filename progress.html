@@ -63,8 +63,9 @@
       <section data-progress-content hidden>
         <h3>Weekly History</h3>
         <p>
-          Select an available day to add or remove a check-in. Future dates
-          and dates before a habit was created cannot be changed.
+          Select an available day to add or remove a check-in. Completion
+          totals include only dates when the habit existed and never include
+          future dates.
         </p>
         <div class="week-controls" role="group" aria-label="Week navigation">
           <button
@@ -88,23 +89,29 @@
             Next &rarr;
           </button>
         </div>
-        <table>
-          <caption>Daily habit completion for the selected week</caption>
-          <thead>
-            <tr>
-              <th scope="col">Habit</th>
-              <th scope="col" data-weekday="0">Mon</th>
-              <th scope="col" data-weekday="1">Tue</th>
-              <th scope="col" data-weekday="2">Wed</th>
-              <th scope="col" data-weekday="3">Thu</th>
-              <th scope="col" data-weekday="4">Fri</th>
-              <th scope="col" data-weekday="5">Sat</th>
-              <th scope="col" data-weekday="6">Sun</th>
-              <th scope="col">Total</th>
-            </tr>
-          </thead>
-          <tbody id="weekly-progress-body"></tbody>
-        </table>
+        <div
+          class="table-scroll"
+          role="region"
+          aria-label="Weekly habit completion"
+          tabindex="0">
+          <table>
+            <caption>Daily habit completion for the selected week</caption>
+            <thead>
+              <tr>
+                <th scope="col">Habit</th>
+                <th scope="col" data-weekday="0">Mon</th>
+                <th scope="col" data-weekday="1">Tue</th>
+                <th scope="col" data-weekday="2">Wed</th>
+                <th scope="col" data-weekday="3">Thu</th>
+                <th scope="col" data-weekday="4">Fri</th>
+                <th scope="col" data-weekday="5">Sat</th>
+                <th scope="col" data-weekday="6">Sun</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody id="weekly-progress-body"></tbody>
+          </table>
+        </div>
       </section>
 
       <section data-progress-content hidden>
@@ -123,17 +130,23 @@
           Your current and longest streaks across all habits. Today's check-in
           can extend a streak that was active yesterday.
         </p>
-        <table>
-          <caption>Current and longest streaks per habit</caption>
-          <thead>
-            <tr>
-              <th scope="col">Habit</th>
-              <th scope="col">Current streak</th>
-              <th scope="col">Longest streak</th>
-            </tr>
-          </thead>
-          <tbody id="streak-progress-body"></tbody>
-        </table>
+        <div
+          class="table-scroll"
+          role="region"
+          aria-label="Habit streaks"
+          tabindex="0">
+          <table>
+            <caption>Current and longest streaks per habit</caption>
+            <thead>
+              <tr>
+                <th scope="col">Habit</th>
+                <th scope="col">Current streak</th>
+                <th scope="col">Longest streak</th>
+              </tr>
+            </thead>
+            <tbody id="streak-progress-body"></tbody>
+          </table>
+        </div>
       </section>
     </main>
     <footer>
