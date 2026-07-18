@@ -22,7 +22,7 @@ HabitFlow is a website that helps users build and maintain positive daily habits
 
 ## Content Structure
 
-Content is structured following standard HTML practices with <html>, <head>, and <body> elements parenting the child elements. The fundamental child elements nested within include <meta>, <title>, <link>, <script>, <header>, <nav>, <main>, and <footer> elements that extend across every page. These elements support the structure of each page and ensure consistency across the website.
+Content is structured following standard HTML practices with `<html>`, `<head>`, and `<body>` elements parenting the child elements. The fundamental child elements nested within include `<meta>`, `<title>`, `<link>`, `<script>`, `<header>`, `<nav>`, `<main>`, and `<footer>` elements that extend across every page. These elements support the structure of each page and ensure consistency across the website.
 
 ## Styling and Responsive Design
 
