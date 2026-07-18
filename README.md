@@ -43,9 +43,9 @@ Only assets provided were the display picture of each team member.
 
 References for the `tips.html` include the following: 
 
-- [Plan to Organize: Habit Tracking]("https://plantoorganize.com/habit-tracking/?v=aee816c341a8")
-- [James Clear: The Habits Guide]("https://jamesclear.com/habits")
-- [The Science Behind Habit Tracking]("https://www.psychologytoday.com/us/blog/parenting-from-a-neuroscience-perspective/202512/the-science-behind-habit-tracking")
+- [Plan to Organize: Habit Tracking](https://plantoorganize.com/habit-tracking/?v=aee816c341a8)
+- [James Clear: The Habits Guide](https://jamesclear.com/habits)
+- [The Science Behind Habit Tracking](https://www.psychologytoday.com/us/blog/parenting-from-a-neuroscience-perspective/202512/the-science-behind-habit-tracking)
 
 Other references include: 
 
