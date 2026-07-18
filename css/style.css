@@ -400,6 +400,32 @@ textarea {
   min-height: 6rem;
 }
 
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.form-error {
+  margin-top: var(--space-1);
+  margin-bottom: 0;
+  color: var(--danger);
+  font-size: var(--text-sm);
+}
+
+.form-error:empty {
+  display: none;
+}
+
+.form-status {
+  padding: var(--space-3) var(--space-4);
+  border-left: 4px solid var(--success);
+  border-radius: var(--radius);
+  background: var(--success-soft);
+  color: var(--text);
+}
+
 fieldset {
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -533,6 +559,102 @@ tbody tr {
 
 tbody tr:hover {
   background: var(--surface-2);
+}
+
+.week-controls {
+  display: grid;
+  grid-template-columns: minmax(7rem, 1fr) minmax(14rem, 2fr) minmax(7rem, 1fr);
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+}
+
+.week-controls > button {
+  width: 100%;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.week-controls-current {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.week-controls-current button {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+.week-controls-current button:disabled {
+  opacity: 1;
+  cursor: default;
+  border-color: var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+.week-range {
+  margin: 0;
+  color: var(--text);
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .week-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .week-controls-current {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    flex-direction: column;
+  }
+
+  .week-controls > button:first-child {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .week-controls > button:last-child {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+.completion-toggle {
+  width: 100%;
+  min-width: 2.5rem;
+  margin: 0;
+  padding: var(--space-1) var(--space-2);
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.completion-toggle:hover {
+  border-color: var(--brand-hover);
+  background: var(--brand-soft);
+  color: var(--text);
+}
+
+.completion-toggle[aria-pressed="true"] {
+  border-color: var(--success);
+  background: var(--success-soft);
+  color: var(--text);
+}
+
+.completion-unavailable {
+  color: var(--text-muted);
 }
 
 /* --- progress + figures --------------------------------------------- */

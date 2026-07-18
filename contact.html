@@ -6,6 +6,7 @@
     <title>Contact - HabitFlow</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" defer></script>
+    <script src="js/contact.js" defer></script>
   </head>
   <body>
     <header>
@@ -30,18 +31,36 @@
           Have feedback, a bug report, or a question about HabitFlow? Send us
           a message using the form below and we will reply within a few days.
         </p>
-        <form>
+        <form id="contact-form">
           <div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name">
+            <label for="name">Name (required)</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              autocomplete="name"
+              aria-describedby="name-error"
+              required>
+            <p class="form-error" id="name-error" aria-live="polite"></p>
           </div>
           <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email">
+            <label for="email">Email (required)</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              aria-describedby="email-error"
+              required>
+            <p class="form-error" id="email-error" aria-live="polite"></p>
           </div>
           <div>
-            <label for="subject">Subject</label>
-            <select id="subject" name="subject">
+            <label for="subject">Subject (required)</label>
+            <select
+              id="subject"
+              name="subject"
+              aria-describedby="subject-error"
+              required>
               <option value="">Select a topic</option>
               <option value="bug">Bug report</option>
               <option value="feedback">Feedback</option>
@@ -49,15 +68,29 @@
               <option value="feature">Feature request</option>
               <option value="other">Other</option>
             </select>
+            <p class="form-error" id="subject-error" aria-live="polite"></p>
           </div>
           <div>
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="6" cols="50"></textarea>
+            <label for="message">Message (required)</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              cols="50"
+              aria-describedby="message-error"
+              required></textarea>
+            <p class="form-error" id="message-error" aria-live="polite"></p>
           </div>
           <div>
             <button type="submit">Send Message</button>
             <button type="reset">Clear</button>
           </div>
+          <p
+            class="form-status"
+            id="contact-status"
+            role="status"
+            aria-live="polite"
+            hidden></p>
         </form>
       </section>
       <section>
