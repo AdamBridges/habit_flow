@@ -49,7 +49,7 @@ main section:has(article) {
   align-items: start;
 }
 
-main section:has(article) > h2 {
+main section:has(article) > h3 {
   grid-column: 1 / -1;
   margin-bottom: 0;
 }
@@ -114,6 +114,29 @@ main section article p:last-child {
   border-left: 4px solid #8ecb9b; /* pastel green */
 }
 
+main section article .done-toggle {
+  margin-top: var(--space-2);
+  align-self: start;
+  padding: 0.4rem 0.9rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--brand);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--brand);
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+main section article .done-toggle:hover {
+  background: var(--brand-soft);
+}
+
+main section article .done-toggle.is-done {
+  background: var(--brand);
+  color: var(--brand-contrast);
+}
+
 .category {
   display: inline-block;
   align-self: start;
@@ -132,4 +155,18 @@ main > div {
   padding: 0;
   border: none;
   background: transparent;
+}
+
+.add-habit-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--brand);
+  color: var(--brand-contrast);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-weight: 600;
+}
+.add-habit-btn:hover {
+  background: var(--brand-hover);
+  color: var(--brand-contrast);
 }

@@ -6,6 +6,8 @@
  */
 const HABITS_KEY = "habitflow_habits";
 
+const COMPLETIONS_KEY = "habitflow_completions";
+
 const SAVED_CHANGES_MESSAGE = "Your changes have been saved!";
 const SAVED_CHANGES_ERROR_MESSAGE = "Sorry, there was an error saving your changes. Please try again later.";
 
@@ -22,7 +24,7 @@ const EMAIL_FAILURE_MESSAGE = "Sorry, there was an error sending your message. P
  * @returns {string} - Today's date in YYYY-MM-DD format.
  */
 function getTodayDate() {
-  return new Date().toLocaleDateString().split("T")[0];
+  return new Date().toISOString().split("T")[0];
 }
 
 /**
@@ -31,7 +33,6 @@ function getTodayDate() {
  */
 function saveHabits(habits) {
   localStorage.setItem(HABITS_KEY, JSON.stringify(habits));
-  console.log("Habits saved to localStorage:", habits);
 }
 
 /**
@@ -40,7 +41,6 @@ function saveHabits(habits) {
  */
 function loadHabits() {
   const stored = localStorage.getItem(HABITS_KEY);
-  console.log("Habits loaded from localStorage:", stored);
   if (stored) {
     return JSON.parse(stored).map(habit => new Habit(habit));
   }
@@ -54,6 +54,79 @@ function loadHabits() {
  */
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+
+/**
+ * Loads the completions object from localStorage. Returns an empty object if
+ * nothing has been saved yet.
+ *
+ * The returned object maps a date string ("2026-07-11") to an array of habit
+ * ids completed on that date, e.g. { "2026-07-11": [1, 3] }.
+ *
+ * @returns {Object<string, number[]>}
+ */
+function loadCompletions() {
+  const stored = localStorage.getItem(COMPLETIONS_KEY);
+  if (stored) {
+    return JSON.parse(stored);
+  }
+  return {};
+}
+
+/**
+ * Saves the completions object to localStorage.
+ * @param {Object<string, number[]>} completions
+ */
+function saveCompletions(completions) {
+  localStorage.setItem(COMPLETIONS_KEY, JSON.stringify(completions));
+}
+
+/**
+ * Checks whether a specific habit was completed on a specific date.
+ * @param {number} habitId - The id of the habit to check.
+ * @param {string} date - The date to check, in YYYY-MM-DD format.
+ * @returns {boolean} - True if that habit is marked complete on that date.
+ */
+function isHabitCompleted(habitId, date) {
+  const completions = loadCompletions();
+  const idsForDay = completions[date] || [];
+  return idsForDay.includes(habitId);
+}
+
+/**
+ * Marks a habit as either complete or not complete on a given date, then saves
+ * the change to localStorage. This is the single place that both the dashboard
+ * checklist and the My Habits "Done today" toggle go through, so completion
+ * data always stays consistent no matter which page you use.
+ *
+ * @param {number} habitId - The id of the habit being toggled.
+ * @param {string} date - The date being changed, in YYYY-MM-DD format.
+ * @param {boolean} done - True to mark complete, false to unmark.
+ */
+function setHabitCompletion(habitId, date, done) {
+  const completions = loadCompletions();
+
+  // Start from the list of ids already completed that day (or an empty list).
+  const idsForDay = completions[date] || [];
+
+  // Rebuild the list: keep every id EXCEPT the one we're changing. This gives
+  // us a clean list with no duplicates, which we then add the id back into
+  // only if `done` is true.
+  const withoutThisHabit = idsForDay.filter((id) => id !== habitId);
+
+  if (done) {
+    withoutThisHabit.push(habitId);
+  }
+
+  if (withoutThisHabit.length > 0) {
+    completions[date] = withoutThisHabit;
+  } else {
+    // No habits left for this day, so drop the empty entry to keep the object tidy.
+    delete completions[date];
+  }
+
+  saveCompletions(completions);
 }
 
 

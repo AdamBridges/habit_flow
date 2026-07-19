@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/habits.css" />
     <script src="js/script.js" defer></script>
+    <script src="js/habits.js" defer></script>
   </head>
   <body>
     <header>
@@ -27,10 +28,9 @@
       <h2>My Habits</h2>
       <div>
         <p>Browse all the habits you've created. Filter by category to find what fits your goals.</p>
+        <p><a href="add_habit.html" class="add-habit-btn">+ Add a new habit</a></p>
 
-
-    <!-- Filter for habits by category or search by habit name -->
-    <form>
+    <div id="filter-form">
         <div class="field">
             <label for="searchInput">Search:</label>
             <input id="searchInput" type="search" name="search" placeholder="Search habits..." />
@@ -45,55 +45,33 @@
                 <option value="Learning">Learning</option>
             </select>
         </div>
-
-        <button type="submit">Apply</button>
-    </form>
+    </div>
 
 
     <hr>
 
+    
 
-    <!-- Show this section when the user has at least one habit created.
-         At the moment, these articles are placeholders since it is not reading
-         from any real database. They appear above the "no habits created" warning
-         as it can't be hidden/toggled. -->
+    <!-- Shown when the user has habits, but the current search / category
+         filter matches none of them. -->
+    <section id="habits-none-match" hidden>
+        <h3>No Matching Habits</h3>
+        <p>
+            No habits match your current search or filter. Try clearing the
+            search box or choosing "All" categories.
+        </p>
+    </section>
 
-
-    <section>
-        <h2>Your Habits</h2>
-
-
-        <article class="priority-medium">
-            <h3>Drink 8 glasses of water</h3>
-            <p><strong>Category:</strong> <span class="category">Health</span></p>
-            <p>I want to stay hydrated throughout the day.</p>
-            <p><strong>Frequency:</strong> Daily | <strong>Priority:</strong> Medium</p>
-        </article>
-
-
-        <article class="priority-low">
-            <h3>Clean my room</h3>
-            <p><strong>Category:</strong> <span class="category">Productivity</span></p>
-            <p>I will spend 15 minutes each evening keeping up with household cleanliness.</p>
-            <p><strong>Frequency:</strong> Daily | <strong>Priority:</strong> Low</p>
-        </article>
-
-
-        <article class="priority-high">
-            <h3>Practice coding problems</h3>
-            <p><strong>Category:</strong> <span class="category">Learning</span></p>
-            <p>I want to improve my programming skills.</p>
-            <p><strong>Frequency:</strong> Daily | <strong>Priority:</strong> High</p>
-        </article>
-
-
+    <!-- Shown when valid habits are available, rendered in js. -->
+    <section id="habits-list" hidden>
+        <h3>Your Habits</h3>
     </section>
 
 
-    <!-- Show this section instead of the one above when the user has
-         not created any habits yet. -->
-    <section>
-        <h2>No Habits Created</h2>
+
+    <!-- Shown instead of the list when the user has not created any habits at all. -->
+    <section id="habits-empty" hidden>
+        <h3>No Habits Created</h3>
         <p>
             You haven't created any habits yet! Try making a new habit or browse for something
             that interests you on the

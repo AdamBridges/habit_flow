@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/dashboard.css"/>
     <script src="js/script.js" defer></script>
+    <script src="js/dashboard.js" defer></script>
   </head>
   <body>
     <header>
@@ -30,143 +31,74 @@
         <p>Welcome back! Here's how you're doing today.</p>
 
 
-        <!-- Show this section when the user has at least one habit created.
-         At the moment, this information is made of placeholders since it is not reading
-         from any real database. They appear above the "no habits created" warning
-         as it can't be hidden/toggled. -->
+        <div id="dashboard-content" hidden>
 
 
-        <!-- High-level stats summary (streak, today's completion, totals) -->
-        <section class="overview">
-          <h3>Overview</h3>
-          <ul class="stat-grid">
-            <li><strong>Current streak:</strong> 12 days &#9650; (up from last week)</li>
-            <li><strong>Today's progress:</strong> 2 of 3 habits completed</li>
-            <li><strong>Habits tracked:</strong> 3</li>
-            <li><strong>Longest streak:</strong> 27 days</li>
-          </ul>
-        </section>
+          <section class="overview">
+            <h3>Overview</h3>
+            <ul class="stat-grid" id="overview-stats">
+            </ul>
+          </section>
 
 
-        <hr>
+          <hr>
+
+          <section class="today">
+            <h3>Today's Habits</h3>
+            <form id="today-form">
+            </form>
+          </section>
 
 
-        <!-- Daily checklist. Currently using placeholders. -->
+          <hr>
 
-        <section class="today">
-          <h3>Today's Habits</h3>
-          <form>
-            <p>
-              <input type="checkbox" id="habit1" name="habit1" checked>
-              <label for="habit1">Drink 8 glasses of water</label>
-              &nbsp;&nbsp;<em>(Health)</em>
+
+          <section class="performance">
+            <h3>Habit Performance</h3>
+
+            <h4>Most Consistent Habits</h4>
+            <ol id="perf-most">
+            </ol>
+
+            <h4>Least Consistent Habits</h4>
+            <ol id="perf-least">
+            </ol>
+          </section>
+
+
+          <hr>
+
+
+          <!-- Contribution chart. Each cell shows how many habits were
+               completed that day over the last four weeks. -->
+          <section class="activity">
+            <h3>Recent Activity</h3>
+            <div class="heatmap-scroll">
+              <table class="heatmap">
+                <thead>
+                  <tr id="heatmap-head-row">
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody id="heatmap-body">
+                </tbody>
+              </table>
+            </div>
+            <p class="heatmap-legend">
+              <span>Less</span>
+              <span class="legend-cell" data-level="0"></span>
+              <span class="legend-cell" data-level="1"></span>
+              <span class="legend-cell" data-level="2"></span>
+              <span class="legend-cell" data-level="3"></span>
+              <span>More</span>
             </p>
-            <p>
-              <input type="checkbox" id="habit2" name="habit2" checked>
-              <label for="habit2">Clean my room</label>
-              &nbsp;&nbsp;<em>(Productivity)</em>
-            </p>
-            <p>
-              <input type="checkbox" id="habit3" name="habit3">
-              <label for="habit3">Practice coding problems</label>
-              &nbsp;&nbsp;<em>(Learning)</em>
-            </p>
-          </form>
-        </section>
+          </section>
+
+        </div>
 
 
-        <hr>
-
-
-        <!-- Performance breakdown. The triangle arrows show week-over-week change. -->
-
-        <section class="performance">
-          <h3>Habit Performance</h3>
-
-
-          <h4>Most Consistent Habits</h4>
-          <ol>
-            <li>Drink 8 glasses of water &mdash; 95% completion &nbsp; &#9650; +5%</li>
-            <li>Clean my room &mdash; 80% completion &nbsp; &#9650; +12%</li>
-          </ol>
-
-
-          <h4>Least Consistent Habits</h4>
-          <ol>
-            <li>Practice coding problems &mdash; 40% completion &nbsp; &#9660; -10%</li>
-          </ol>
-        </section>
-
-
-        <hr>
-
-
-        <!-- Contribution chart placeholder. For now, cells display the
-             number of habits completed that day. -->
-
-        <section class="activity">
-          <h3>Recent Activity</h3>
-          <div class="heatmap-scroll">
-            <table class="heatmap">
-            <thead>
-              <tr>
-                <th>&nbsp;</th>
-                <th>Week 1</th>
-                <th>Week 2</th>
-                <th>Week 3</th>
-                <th>Week 4</th>
-              </tr>
-            </thead>
-              <tbody>
-                <tr>
-                  <th>Mon</th>
-                  <td data-level="3" title="3 of 3"></td><td data-level="2" title="2 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="2" title="2 of 3"></td>
-                </tr>
-                <tr>
-                  <th>Tue</th>
-                  <td data-level="1" title="1 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="2" title="2 of 3"></td><td data-level="3" title="3 of 3"></td>
-                </tr>
-                <tr>
-                  <th>Wed</th>
-                  <td data-level="2" title="2 of 3"></td><td data-level="0" title="0 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="3" title="3 of 3"></td>
-                </tr>
-                <tr>
-                  <th>Thu</th>
-                  <td data-level="3" title="3 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="1" title="1 of 3"></td><td data-level="2" title="2 of 3"></td>
-                </tr>
-                <tr>
-                  <th>Fri</th>
-                  <td data-level="2" title="2 of 3"></td><td data-level="2" title="2 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="3" title="3 of 3"></td>
-                </tr>
-                <tr>
-                  <th>Sat</th>
-                  <td data-level="0" title="0 of 3"></td><td data-level="1" title="1 of 3"></td><td data-level="2" title="2 of 3"></td><td data-level="1" title="1 of 3"></td>
-                </tr>
-                <tr>
-                  <th>Sun</th>
-                  <td data-level="1" title="1 of 3"></td><td data-level="2" title="2 of 3"></td><td data-level="3" title="3 of 3"></td><td data-level="2" title="2 of 3"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="heatmap-legend">
-            <span>Less</span>
-            <span class="legend-cell" data-level="0"></span>
-            <span class="legend-cell" data-level="1"></span>
-            <span class="legend-cell" data-level="2"></span>
-            <span class="legend-cell" data-level="3"></span>
-            <span>More</span>
-          </p>
-        </section>
-
-
-        <hr>
-
-
-        <!-- Show this section instead of the one above when the user has
-         not created any habits yet. -->
-
-        <section>
+        <!-- Shown instead of #dashboard-content when the user has no habits yet. -->
+        <section id="dashboard-empty" hidden>
           <h3>No Habits Created</h3>
           <p>
             You don't have any habits to track yet. Head to the
